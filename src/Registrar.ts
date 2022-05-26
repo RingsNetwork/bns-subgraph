@@ -23,12 +23,14 @@ import {
 import {
   NameRegistered as ControllerNameRegisteredEvent,
   NameRenewed as ControllerNameRenewedEvent
-} from './types/EthRegistrarController/EthRegistrarController'
+} from './types/RegistrarController/RegistrarController'
 
 // Import entity types generated from the GraphQL schema
 import { Account, Domain, Registration, NameRegistered, NameRenewed, NameTransferred } from './types/schema'
 
-var rootNode:ByteArray = byteArrayFromHex("93cdeb708b7545dc668eb9280176169d1c33cfd8ed6f04690a0bcc88a93fc4ae")
+// ETH_NODE = 93cdeb708b7545dc668eb9280176169d1c33cfd8ed6f04690a0bcc88a93fc4ae
+// BTC_NODE = 0xf702f1b03281458158bc938ae02bb9e415467e8a03af28a2c5e55b6a55192b77
+var rootNode:ByteArray = byteArrayFromHex("0xf702f1b03281458158bc938ae02bb9e415467e8a03af28a2c5e55b6a55192b77")
 
 export function handleNameRegistered(event: NameRegisteredEvent): void {
   let account = new Account(event.params.owner.toHex())
@@ -82,7 +84,7 @@ function setNamePreimage(name: string, label: Bytes, cost: BigInt): void {
   let domain = Domain.load(crypto.keccak256(concat(rootNode, label)).toHex())!
   if(domain.labelName !== name) {
     domain.labelName = name
-    domain.name = name + '.eth'
+    domain.name = name + '.btc'
     domain.save()
   }
 
