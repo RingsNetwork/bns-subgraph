@@ -127,7 +127,7 @@
   {
     "constant": true,
     "inputs": [],
-    "name": "ens",
+    "name": "bns",
     "outputs": [
       {
         "name": "",
@@ -395,7 +395,7 @@
   {
     "inputs": [
       {
-        "name": "_ens",
+        "name": "_bns",
         "type": "address"
       },
       {
