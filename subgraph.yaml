@@ -106,7 +106,7 @@ dataSources:
           handler: handleNameTransferred
   - kind: ethereum/contract
     name: RegistrarController
-    network: mainnet
+    network: rinkeby
     source:
       address: "0xf45093039128ED0184209C91EBB7c95C983eb494"
       abi: RegistrarController
