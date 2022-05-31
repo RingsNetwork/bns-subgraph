@@ -10,11 +10,11 @@
     "deploy-local": "graph deploy graphprotocol/bns --debug --ipfs http://localhost:5001 --node http://127.0.0.1:8020/ --version-label 0.0.1",
     "remove-local": "graph remove graphprotocol/bns --node http://127.0.0.1:8020",
     "docker:setup": "yarn codegen && yarn docker:create-local && yarn docker:deploy-local",
-    "build": "graph build",
+    "build": "graph build"
   },
   "devDependencies": {
     "@ensdomains/content-hash": "^2.5.3",
-    "@graphprotocol/graph-cli": "^0.23.2",
-    "@graphprotocol/graph-ts": "^0.23.1"
+    "@graphprotocol/graph-cli": "^0.30.1",
+    "@graphprotocol/graph-ts": "^0.27.0"
   }
 }
