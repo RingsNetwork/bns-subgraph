@@ -1,6 +1,6 @@
 type Domain @entity {
   id: ID!               # The namehash of the name
-  name: String          # The human readable name, if known. Unknown portions replaced with hash in square brackets (eg, foo.[1234].btc)
+  name: String          # The human readable name, if known. Unknown portions replaced with hash in square brackets (eg, foo.[1234].eth)
   labelName: String     # The human readable label name (imported from CSV), if known
   labelhash: Bytes      # keccak256(labelName)
   parent: Domain        # The namehash (id) of the parent name
@@ -170,7 +170,6 @@ type TextChanged implements ResolverEvent @entity {
   blockNumber: Int!
   transactionID: Bytes!
   key: String!
-  value: String
 }
 
 type ContenthashChanged implements ResolverEvent @entity {
