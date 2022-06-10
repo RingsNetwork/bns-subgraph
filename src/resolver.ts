@@ -1,22 +1,31 @@
-import { Address, ByteArray, Bytes, ethereum, Value } from "@graphprotocol/graph-ts";
-import { Resolver as ResolverContract } from "./types/Resolver/Resolver";
 import {
   ABIChanged as ABIChangedEvent,
   AddrChanged as AddrChangedEvent,
   AddressChanged as AddressChangedEvent,
-  AuthorisationChanged as AuthorisationChangedEvent,
+  //AuthorisationChanged as AuthorisationChangedEvent,
   ContenthashChanged as ContenthashChangedEvent,
   InterfaceChanged as InterfaceChangedEvent,
   NameChanged as NameChangedEvent,
   PubkeyChanged as PubkeyChangedEvent,
-  TextChanged as TextChangedEvent
-} from './types/Resolver/Resolver';
+  TextChanged as TextChangedEvent,
+} from './types/Resolver/Resolver'
+
 import {
-  AbiChanged, Account, AddrChanged, AuthorisationChanged, ContenthashChanged, Domain, InterfaceChanged, MulticoinAddrChanged,
-  NameChanged, PubkeyChanged, Resolver, TextChanged
-} from './types/schema';
+  Account,
+  Domain,
+  Resolver,
+  AddrChanged,
+  MulticoinAddrChanged,
+  NameChanged,
+  AbiChanged,
+  PubkeyChanged,
+  ContenthashChanged,
+  InterfaceChanged,
+  //AuthorisationChanged,
+  TextChanged,
+} from './types/schema'
 
-
+import { Bytes, Address, ethereum } from "@graphprotocol/graph-ts";
 
 export function handleAddrChanged(event: AddrChangedEvent): void {
   let account = new Account(event.params.a.toHexString())
@@ -42,30 +51,30 @@ export function handleAddrChanged(event: AddrChangedEvent): void {
   resolverEvent.save()
 }
 
-export function handleMulticoinAddrChanged(event: AddressChangedEvent): void {
-  let resolver = getOrCreateResolver(event.params.node, event.address)
+//export function handleMulticoinAddrChanged(event: AddressChangedEvent): void {
+  //let resolver = getOrCreateResolver(event.params.node, event.address)
 
-  let coinType = event.params.coinType
-  if(resolver.coinTypes == null) {
-    resolver.coinTypes = [coinType];
-    resolver.save();
-  } else {
-    let coinTypes = resolver.coinTypes!
-    if(!coinTypes.includes(coinType)){
-      coinTypes.push(coinType)
-      resolver.coinTypes = coinTypes
-      resolver.save()
-    }
-  }
+  //let coinType = event.params.coinType
+  //if(resolver.coinTypes == null) {
+    //resolver.coinTypes = [coinType];
+    //resolver.save();
+  //} else {
+    //let coinTypes = resolver.coinTypes!
+    //if(!coinTypes.includes(coinType)){
+      //coinTypes.push(coinType)
+      //resolver.coinTypes = coinTypes
+      //resolver.save()
+    //}
+  //}
 
-  let resolverEvent = new MulticoinAddrChanged(createEventID(event))
-  resolverEvent.resolver = resolver.id
-  resolverEvent.blockNumber = event.block.number.toI32()
-  resolverEvent.transactionID = event.transaction.hash
-  resolverEvent.coinType = coinType
-  resolverEvent.addr = event.params.newAddress
-  resolverEvent.save()
-}
+  //let resolverEvent = new MulticoinAddrChanged(createEventID(event))
+  //resolverEvent.resolver = resolver.id
+  //resolverEvent.blockNumber = event.block.number.toI32()
+  //resolverEvent.transactionID = event.transaction.hash
+  //resolverEvent.coinType = coinType
+  //resolverEvent.addr = event.params.newAddress
+  //resolverEvent.save()
+//}
 
 export function handleNameChanged(event: NameChangedEvent): void {
   if(event.params.name.indexOf("\u0000") != -1) return;
@@ -99,9 +108,6 @@ export function handlePubkeyChanged(event: PubkeyChangedEvent): void {
 
 export function handleTextChanged(event: TextChangedEvent): void {
   let resolver = getOrCreateResolver(event.params.node, event.address)
-  let contract = ResolverContract.bind(event.address)
-  let value = contract.try_text(event.params.node, event.params.key)
-
   let key = event.params.key;
   if(resolver.texts == null) {
     resolver.texts = [key];
@@ -120,7 +126,6 @@ export function handleTextChanged(event: TextChangedEvent): void {
   resolverEvent.blockNumber = event.block.number.toI32()
   resolverEvent.transactionID = event.transaction.hash
   resolverEvent.key = event.params.key
-  resolverEvent.value = value.value
   resolverEvent.save()
 }
 
@@ -147,16 +152,16 @@ export function handleInterfaceChanged(event: InterfaceChangedEvent): void {
   resolverEvent.save()
 }
 
-export function handleAuthorisationChanged(event: AuthorisationChangedEvent): void {
-  let resolverEvent = new AuthorisationChanged(createEventID(event))
-  resolverEvent.blockNumber = event.block.number.toI32()
-  resolverEvent.transactionID = event.transaction.hash
-  resolverEvent.resolver = createResolverID(event.params.node, event.address)
-  resolverEvent.owner = event.params.owner
-  resolverEvent.target = event.params.target
-  resolverEvent.isAuthorized = event.params.isAuthorised
-  resolverEvent.save()
-}
+//export function handleAuthorisationChanged(event: AuthorisationChangedEvent): void {
+  //let resolverEvent = new AuthorisationChanged(createEventID(event))
+  //resolverEvent.blockNumber = event.block.number.toI32()
+  //resolverEvent.transactionID = event.transaction.hash
+  //resolverEvent.resolver = createResolverID(event.params.node, event.address)
+  //resolverEvent.owner = event.params.owner
+  //resolverEvent.target = event.params.target
+  //resolverEvent.isAuthorized = event.params.isAuthorised
+  //resolverEvent.save()
+//}
 
 function getOrCreateResolver(node: Bytes, address: Address): Resolver {
   let id = createResolverID(node, address)

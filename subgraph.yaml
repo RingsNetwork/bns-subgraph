@@ -45,28 +45,20 @@ dataSources:
       file: ./src/resolver.ts
       entities:
         - AddrChanged
-        - MulticoinAddrChanged
         - NameChanged
         - AbiChanged
         - PubkeyChanged
         - Textchanged
         - ContenthashChanged
         - InterfaceChanged
-        - AuthorisationChanged
       abis:
         - name: Resolver
           file: ./abis/PublicResolver.json
       eventHandlers:
-        - event: 'ABIChanged(indexed bytes32,indexed uint256)'
+        - event: "ABIChanged(indexed bytes32,indexed uint256)"
           handler: handleABIChanged
-        - event: 'AddrChanged(indexed bytes32,address)'
+        - event: "AddrChanged(indexed bytes32,address)"
           handler: handleAddrChanged
-        - event: 'AddressChanged(indexed bytes32,uint256,bytes)'
-          handler: handleMulticoinAddrChanged
-        - event: >-
-            AuthorisationChanged(indexed bytes32,indexed address,indexed
-            address,bool)
-          handler: handleAuthorisationChanged
         - event: 'ContenthashChanged(indexed bytes32,bytes)'
           handler: handleContentHashChanged
         - event: 'InterfaceChanged(indexed bytes32,indexed bytes4,address)'
