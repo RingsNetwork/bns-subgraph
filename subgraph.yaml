@@ -10,7 +10,7 @@ dataSources:
     name: BNSRegistry
     network: rinkeby
     source:
-      address: "0xe6b7E105fEa83f81f425C0b5e1eA1F252A0349A1"
+      address: "0x5C1c30fad3d197B12eAE39CE66bB2887c32AFe53"
       abi: BnsRegistry
     mapping:
       kind: ethereum/events
@@ -73,7 +73,7 @@ dataSources:
     name: BaseRegistrar
     network: rinkeby
     source:
-      address: '0xb3a528a2a11aa24dC0C4370868996768e43D964C'
+      address: '0x4929cdC8711Bcd667ddD8617471fE6F60B819E36'
       abi: BaseRegistrar
     mapping:
       kind: ethereum/events
@@ -99,7 +99,7 @@ dataSources:
     name: RegistrarController
     network: rinkeby
     source:
-      address: '0xeB7f8139e3Ab99ba26c3f4a9689dF8Ca5B55fbDC'
+      address: '0x215A0A3afB7CAf0D7cD3ff2F0c26Faab87adF181'
       abi: RegistrarController
     mapping:
       kind: ethereum/events
