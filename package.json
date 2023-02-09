@@ -12,9 +12,11 @@
     "docker:setup": "yarn codegen && yarn docker:create-local && yarn docker:deploy-local",
     "build": "graph build"
   },
+  "dependencies": {
+    "@ensdomains/content-hash": "^2.5.7",
+    "@graphprotocol/graph-cli": "^0.38.0"
+  },
   "devDependencies": {
-    "@ensdomains/content-hash": "^2.5.3",
-    "@graphprotocol/graph-cli": "^0.30.1",
-    "@graphprotocol/graph-ts": "^0.27.0"
+    "@graphprotocol/graph-ts": "^0.29.3"
   }
 }

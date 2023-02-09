@@ -8,13 +8,13 @@ schema:
 dataSources:
   - kind: ethereum/contract
     name: BNSRegistry
-    network: rinkeby
+    network: goerli
     source:
-      address: "0x5C1c30fad3d197B12eAE39CE66bB2887c32AFe53"
+      address: "0x59a397a121825c37eDE9eABb1dDeAD8A7Af208D7"
       abi: BnsRegistry
     mapping:
       kind: ethereum/events
-      apiVersion: 0.0.5
+      apiVersion: 0.0.6
       language: wasm/assemblyscript
       file: ./src/bnsRegistry.ts
       entities:
@@ -35,12 +35,12 @@ dataSources:
           handler: handleNewTTL
   - kind: ethereum/contract
     name: Resolver
-    network: rinkeby
+    network: goerli
     source:
       abi: Resolver
     mapping:
       kind: ethereum/events
-      apiVersion: 0.0.5
+      apiVersion: 0.0.6
       language: wasm/assemblyscript
       file: ./src/resolver.ts
       entities:
@@ -71,13 +71,13 @@ dataSources:
           handler: handleTextChanged
   - kind: ethereum/contract
     name: BaseRegistrar
-    network: rinkeby
+    network: goerli
     source:
-      address: '0x4929cdC8711Bcd667ddD8617471fE6F60B819E36'
+      address: '0x922Bc239b66d565AF192723B60Ea4CD4Ec35Bd95'
       abi: BaseRegistrar
     mapping:
       kind: ethereum/events
-      apiVersion: 0.0.5
+      apiVersion: 0.0.6
       language: wasm/assemblyscript
       file: ./src/Registrar.ts
       entities:
@@ -97,13 +97,13 @@ dataSources:
           handler: handleNameTransferred
   - kind: ethereum/contract
     name: RegistrarController
-    network: rinkeby
+    network: goerli
     source:
-      address: '0x215A0A3afB7CAf0D7cD3ff2F0c26Faab87adF181'
+      address: '0x136269D33904a1a3b82Da15667E23E67d6AA6e20'
       abi: RegistrarController
     mapping:
       kind: ethereum/events
-      apiVersion: 0.0.5
+      apiVersion: 0.0.6
       language: wasm/assemblyscript
       file: ./src/Registrar.ts
       entities:
