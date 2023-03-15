@@ -2,16 +2,17 @@ specVersion: 0.0.4
 description: >-
   A secure & decentralized way to address resources on and off the blockchain
   using simple, human-readable names. Access domains and transfer history.
-repository: 'https://github.com/ensdomains/ens-subgraph'
+repository: "https://github.com/RingsNetwork/bns-subgraph"
 schema:
   file: ./schema.graphql
 dataSources:
   - kind: ethereum/contract
     name: BNSRegistry
-    network: goerli
+    network: mainnet
     source:
-      address: "0x509b9F64c1041589eC2C46Ca93f57b89FdE7FB44"
+      address: "0x799f64EC92E82cc1eC504B53DD79b3E2ea92396b"
       abi: BnsRegistry
+      startBlock: 16831320
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.6
@@ -35,9 +36,10 @@ dataSources:
           handler: handleNewTTL
   - kind: ethereum/contract
     name: Resolver
-    network: goerli
+    network: mainnet
     source:
       abi: Resolver
+      startBlock: 16831320
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.6
@@ -71,10 +73,11 @@ dataSources:
           handler: handleTextChanged
   - kind: ethereum/contract
     name: BaseRegistrar
-    network: goerli
+    network: mainnet
     source:
-      address: '0xe779B9AFb0323A658f5246a9901148B671B6Fb71'
+      address: '0x457eFd33Def0bFF2dfe33089D385898D919d3a10'
       abi: BaseRegistrar
+      startBlock: 16831320
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.6
@@ -97,9 +100,9 @@ dataSources:
           handler: handleNameTransferred
   - kind: ethereum/contract
     name: RegistrarController
-    network: goerli
+    network: mainnet
     source:
-      address: '0xb29E6bB9f4F073D166aFE6DAF4bFc1b9Daa53cF0'
+      address: '0x7d311cCb3b4F5006A1215418BfC45961fC5609e4'
       abi: RegistrarController
     mapping:
       kind: ethereum/events
