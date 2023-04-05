@@ -1439,6 +1439,23 @@ export class TextChanged extends Entity {
   set key(value: string) {
     this.set("key", Value.fromString(value));
   }
+
+  get value(): string | null {
+    let value = this.get("value");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toString();
+    }
+  }
+
+  set value(value: string | null) {
+    if (!value) {
+      this.unset("value");
+    } else {
+      this.set("value", Value.fromString(<string>value));
+    }
+  }
 }
 
 export class ContenthashChanged extends Entity {
@@ -1587,93 +1604,5 @@ export class InterfaceChanged extends Entity {
 
   set implementer(value: Bytes) {
     this.set("implementer", Value.fromBytes(value));
-  }
-}
-
-export class AuthorisationChanged extends Entity {
-  constructor(id: string) {
-    super();
-    this.set("id", Value.fromString(id));
-  }
-
-  save(): void {
-    let id = this.get("id");
-    assert(id != null, "Cannot save AuthorisationChanged entity without an ID");
-    if (id) {
-      assert(
-        id.kind == ValueKind.STRING,
-        `Entities of type AuthorisationChanged must have an ID of type String but the id '${id.displayData()}' is of type ${id.displayKind()}`
-      );
-      store.set("AuthorisationChanged", id.toString(), this);
-    }
-  }
-
-  static load(id: string): AuthorisationChanged | null {
-    return changetype<AuthorisationChanged | null>(
-      store.get("AuthorisationChanged", id)
-    );
-  }
-
-  get id(): string {
-    let value = this.get("id");
-    return value!.toString();
-  }
-
-  set id(value: string) {
-    this.set("id", Value.fromString(value));
-  }
-
-  get resolver(): string {
-    let value = this.get("resolver");
-    return value!.toString();
-  }
-
-  set resolver(value: string) {
-    this.set("resolver", Value.fromString(value));
-  }
-
-  get blockNumber(): i32 {
-    let value = this.get("blockNumber");
-    return value!.toI32();
-  }
-
-  set blockNumber(value: i32) {
-    this.set("blockNumber", Value.fromI32(value));
-  }
-
-  get transactionID(): Bytes {
-    let value = this.get("transactionID");
-    return value!.toBytes();
-  }
-
-  set transactionID(value: Bytes) {
-    this.set("transactionID", Value.fromBytes(value));
-  }
-
-  get owner(): Bytes {
-    let value = this.get("owner");
-    return value!.toBytes();
-  }
-
-  set owner(value: Bytes) {
-    this.set("owner", Value.fromBytes(value));
-  }
-
-  get target(): Bytes {
-    let value = this.get("target");
-    return value!.toBytes();
-  }
-
-  set target(value: Bytes) {
-    this.set("target", Value.fromBytes(value));
-  }
-
-  get isAuthorized(): boolean {
-    let value = this.get("isAuthorized");
-    return value!.toBoolean();
-  }
-
-  set isAuthorized(value: boolean) {
-    this.set("isAuthorized", Value.fromBoolean(value));
   }
 }

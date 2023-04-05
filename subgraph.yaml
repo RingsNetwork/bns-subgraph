@@ -52,7 +52,6 @@ dataSources:
         - Textchanged
         - ContenthashChanged
         - InterfaceChanged
-        - AuthorisationChanged
       abis:
         - name: Resolver
           file: ./abis/PublicResolver.json
@@ -63,10 +62,6 @@ dataSources:
           handler: handleAddrChanged
         - event: "AddressChanged(indexed bytes32,uint256,bytes)"
           handler: handleMulticoinAddrChanged
-        - event: >-
-            AuthorisationChanged(indexed bytes32,indexed address,indexed
-            address,bool)
-          handler: handleAuthorisationChanged
         - event: "ContenthashChanged(indexed bytes32,bytes)"
           handler: handleContentHashChanged
         - event: "InterfaceChanged(indexed bytes32,indexed bytes4,address)"

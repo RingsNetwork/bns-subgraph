@@ -170,6 +170,7 @@ type TextChanged implements ResolverEvent @entity {
   blockNumber: Int!
   transactionID: Bytes!
   key: String!
+  value: String
 }
 
 type ContenthashChanged implements ResolverEvent @entity {
@@ -187,14 +188,4 @@ type InterfaceChanged implements ResolverEvent @entity {
   transactionID: Bytes!
   interfaceID: Bytes!
   implementer: Bytes!
-}
-
-type AuthorisationChanged implements ResolverEvent @entity {
-  id: ID!
-  resolver: Resolver!
-  blockNumber: Int!
-  transactionID: Bytes!
-  owner: Bytes!
-  target: Bytes!
-  isAuthorized: Boolean!
 }
