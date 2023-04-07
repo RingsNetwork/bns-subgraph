@@ -26,13 +26,13 @@ dataSources:
         - name: BnsRegistry
           file: ./abis/BNSRegistry.json
       eventHandlers:
-        - event: 'Transfer(indexed bytes32,address)'
+        - event: "Transfer(indexed bytes32,address)"
           handler: handleTransfer
-        - event: 'NewOwner(indexed bytes32,indexed bytes32,address)'
+        - event: "NewOwner(indexed bytes32,indexed bytes32,address)"
           handler: handleNewOwner
-        - event: 'NewResolver(indexed bytes32,address)'
+        - event: "NewResolver(indexed bytes32,address)"
           handler: handleNewResolver
-        - event: 'NewTTL(indexed bytes32,uint64)'
+        - event: "NewTTL(indexed bytes32,uint64)"
           handler: handleNewTTL
   - kind: ethereum/contract
     name: Resolver
@@ -47,6 +47,7 @@ dataSources:
       file: ./src/resolver.ts
       entities:
         - AddrChanged
+        - MulticoinAddrChanged
         - NameChanged
         - AbiChanged
         - PubkeyChanged
@@ -61,15 +62,17 @@ dataSources:
           handler: handleABIChanged
         - event: "AddrChanged(indexed bytes32,address)"
           handler: handleAddrChanged
-        - event: 'ContenthashChanged(indexed bytes32,bytes)'
+        - event: "AddressChanged(indexed bytes32,uint256,bytes)"
+          handler: handleMulticoinAddrChanged
+        - event: "ContenthashChanged(indexed bytes32,bytes)"
           handler: handleContentHashChanged
-        - event: 'InterfaceChanged(indexed bytes32,indexed bytes4,address)'
+        - event: "InterfaceChanged(indexed bytes32,indexed bytes4,address)"
           handler: handleInterfaceChanged
-        - event: 'NameChanged(indexed bytes32,string)'
+        - event: "NameChanged(indexed bytes32,string)"
           handler: handleNameChanged
-        - event: 'PubkeyChanged(indexed bytes32,bytes32,bytes32)'
+        - event: "PubkeyChanged(indexed bytes32,bytes32,bytes32)"
           handler: handlePubkeyChanged
-        - event: 'TextChanged(indexed bytes32,indexed string,string)'
+        - event: "TextChanged(indexed bytes32,indexed string,string)"
           handler: handleTextChanged
   - kind: ethereum/contract
     name: BaseRegistrar
@@ -92,11 +95,11 @@ dataSources:
         - name: BaseRegistrar
           file: ./abis/BaseRegistrar.json
       eventHandlers:
-        - event: 'NameRegistered(indexed uint256,indexed address,uint256)'
+        - event: "NameRegistered(indexed uint256,indexed address,uint256)"
           handler: handleNameRegistered
-        - event: 'NameRenewed(indexed uint256,uint256)'
+        - event: "NameRenewed(indexed uint256,uint256)"
           handler: handleNameRenewed
-        - event: 'Transfer(indexed address,indexed address,indexed uint256)'
+        - event: "Transfer(indexed address,indexed address,indexed uint256)"
           handler: handleNameTransferred
   - kind: ethereum/contract
     name: RegistrarController
@@ -119,5 +122,5 @@ dataSources:
             NameRegistered(string,indexed bytes32,indexed
             address,uint256,uint256,uint256,uint256)
           handler: handleNameRegisteredByController
-        - event: 'NameRenewed(string,indexed bytes32,uint256,uint256)'
+        - event: "NameRenewed(string,indexed bytes32,uint256,uint256)"
           handler: handleNameRenewedByController
