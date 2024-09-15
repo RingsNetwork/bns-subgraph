@@ -1,20 +1,20 @@
-specVersion: 0.0.3
+specVersion: 0.0.4
 description: >-
   A secure & decentralized way to address resources on and off the blockchain
   using simple, human-readable names. Access domains and transfer history.
-repository: "https://github.com/RingsNetwork/bns-subgraph"
+repository: 'https://github.com/ensdomains/ens-subgraph'
 schema:
   file: ./schema.graphql
 dataSources:
   - kind: ethereum/contract
     name: BNSRegistry
-    network: rinkeby
+    network: goerli
     source:
-      address: "0x5aC5DD8871649bFE1D03750042859099B8b3F94a"
+      address: "0x86DbA8E3035f1F38f536eDeB2fe76BeE139cB6dc"
       abi: BnsRegistry
     mapping:
       kind: ethereum/events
-      apiVersion: 0.0.5
+      apiVersion: 0.0.6
       language: wasm/assemblyscript
       file: ./src/bnsRegistry.ts
       entities:
@@ -35,13 +35,12 @@ dataSources:
           handler: handleNewTTL
   - kind: ethereum/contract
     name: Resolver
-    network: rinkeby
+    network: goerli
     source:
-      address: "0x7A579b26Fe7658dB6423c3F980A48F5475b86CF3"
       abi: Resolver
     mapping:
       kind: ethereum/events
-      apiVersion: 0.0.5
+      apiVersion: 0.0.6
       language: wasm/assemblyscript
       file: ./src/resolver.ts
       entities:
@@ -53,7 +52,6 @@ dataSources:
         - Textchanged
         - ContenthashChanged
         - InterfaceChanged
-        - AuthorisationChanged
       abis:
         - name: Resolver
           file: ./abis/PublicResolver.json
@@ -64,10 +62,6 @@ dataSources:
           handler: handleAddrChanged
         - event: "AddressChanged(indexed bytes32,uint256,bytes)"
           handler: handleMulticoinAddrChanged
-        - event: >-
-            AuthorisationChanged(indexed bytes32,indexed address,indexed
-            address,bool)
-          handler: handleAuthorisationChanged
         - event: "ContenthashChanged(indexed bytes32,bytes)"
           handler: handleContentHashChanged
         - event: "InterfaceChanged(indexed bytes32,indexed bytes4,address)"
@@ -80,13 +74,13 @@ dataSources:
           handler: handleTextChanged
   - kind: ethereum/contract
     name: BaseRegistrar
-    network: rinkeby
+    network: goerli
     source:
-      address: "0x6e7D8BcDF849c941B946A1e666848134611C1F88"
+      address: '0x8CdC3Fb430D739AE943Af4d847DDfC0bF8411D9f'
       abi: BaseRegistrar
     mapping:
       kind: ethereum/events
-      apiVersion: 0.0.5
+      apiVersion: 0.0.6
       language: wasm/assemblyscript
       file: ./src/Registrar.ts
       entities:
@@ -106,13 +100,13 @@ dataSources:
           handler: handleNameTransferred
   - kind: ethereum/contract
     name: RegistrarController
-    network: rinkeby
+    network: goerli
     source:
-      address: "0xf45093039128ED0184209C91EBB7c95C983eb494"
+      address: '0xFa35c05d7Cf1CE63544CD7F925Aa0377bE134F5A'
       abi: RegistrarController
     mapping:
       kind: ethereum/events
-      apiVersion: 0.0.5
+      apiVersion: 0.0.6
       language: wasm/assemblyscript
       file: ./src/Registrar.ts
       entities:
@@ -123,7 +117,7 @@ dataSources:
       eventHandlers:
         - event: >-
             NameRegistered(string,indexed bytes32,indexed
-            address,uint256,uint256)
+            address,uint256,uint256,uint256,uint256)
           handler: handleNameRegisteredByController
         - event: "NameRenewed(string,indexed bytes32,uint256,uint256)"
           handler: handleNameRenewedByController

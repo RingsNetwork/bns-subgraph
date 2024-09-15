@@ -4,7 +4,6 @@ import {
   ABIChanged as ABIChangedEvent,
   AddrChanged as AddrChangedEvent,
   AddressChanged as AddressChangedEvent,
-  AuthorisationChanged as AuthorisationChangedEvent,
   ContenthashChanged as ContenthashChangedEvent,
   InterfaceChanged as InterfaceChangedEvent,
   NameChanged as NameChangedEvent,
@@ -12,11 +11,9 @@ import {
   TextChanged as TextChangedEvent
 } from './types/Resolver/Resolver';
 import {
-  AbiChanged, Account, AddrChanged, AuthorisationChanged, ContenthashChanged, Domain, InterfaceChanged, MulticoinAddrChanged,
+  AbiChanged, Account, AddrChanged, ContenthashChanged, Domain, InterfaceChanged, MulticoinAddrChanged,
   NameChanged, PubkeyChanged, Resolver, TextChanged
 } from './types/schema';
-
-
 
 export function handleAddrChanged(event: AddrChangedEvent): void {
   let account = new Account(event.params.a.toHexString())
@@ -120,7 +117,6 @@ export function handleTextChanged(event: TextChangedEvent): void {
   resolverEvent.blockNumber = event.block.number.toI32()
   resolverEvent.transactionID = event.transaction.hash
   resolverEvent.key = event.params.key
-  resolverEvent.value = value.value
   resolverEvent.save()
 }
 
@@ -128,7 +124,7 @@ export function handleContentHashChanged(event: ContenthashChangedEvent): void {
   let resolver = getOrCreateResolver(event.params.node, event.address)
   resolver.contentHash = event.params.hash
   resolver.save()
-  
+
   let resolverEvent = new ContenthashChanged(createEventID(event))
   resolverEvent.resolver = createResolverID(event.params.node, event.address)
   resolverEvent.blockNumber = event.block.number.toI32()
@@ -144,17 +140,6 @@ export function handleInterfaceChanged(event: InterfaceChangedEvent): void {
   resolverEvent.transactionID = event.transaction.hash
   resolverEvent.interfaceID = event.params.interfaceID
   resolverEvent.implementer = event.params.implementer
-  resolverEvent.save()
-}
-
-export function handleAuthorisationChanged(event: AuthorisationChangedEvent): void {
-  let resolverEvent = new AuthorisationChanged(createEventID(event))
-  resolverEvent.blockNumber = event.block.number.toI32()
-  resolverEvent.transactionID = event.transaction.hash
-  resolverEvent.resolver = createResolverID(event.params.node, event.address)
-  resolverEvent.owner = event.params.owner
-  resolverEvent.target = event.params.target
-  resolverEvent.isAuthorized = event.params.isAuthorised
   resolverEvent.save()
 }
 
